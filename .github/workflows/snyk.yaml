@@ -16,9 +16,9 @@ on:
     #        *  * * * *
     - cron: '0 0 * * 6' # saturday @ midnight
 jobs:
-  permissions:
-    security-events: write
   security:
+    permissions:
+      security-events: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
