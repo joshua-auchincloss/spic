@@ -6,3 +6,4 @@ env
 *.ipynb
 .ruff_cache
 .DS_Store
+.coverage
