@@ -1,12 +1,12 @@
 # `spic`
 
-[![Status](https://img.shields.io/badge/status-beta-blue)](https://github.com/joshua-auchincloss/spic)
+[![Status](https://img.shields.io/badge/status-beta-blue?style=flat-square)](https://github.com/joshua-auchincloss/spic)
 [![Code Coverage](https://img.shields.io/codecov/c/github/joshua-auchincloss/spic?style=flat-square)](https://app.codecov.io/github/joshua-auchincloss/spic)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/charliermarsh/ruff)
-[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
-[![PyPI - Version](https://img.shields.io/pypi/v/spic.svg)](https://pypi.org/project/spic)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/spic.svg)](https://pypi.org/project/spic)
-[![Wheel](https://img.shields.io/pypi/wheel/spic)](https://pypi.org/project/spic)
+[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg?style=flat-square)](https://github.com/pypa/hatch)
+[![PyPI - Version](https://img.shields.io/pypi/v/spic.svg?style=flat-square)](https://pypi.org/project/spic)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/spic.svg?style=flat-square)](https://pypi.org/project/spic)
+[![Wheel](https://img.shields.io/pypi/wheel/spic?style=flat-square)](https://pypi.org/project/spic)
 [![Snyk](https://img.shields.io/snyk/vulnerabilities/github/joshua-auchincloss/spic?style=flat-square)](https://app.codecov.io/github/joshua-auchincloss/spic)
 
 
