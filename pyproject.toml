@@ -44,6 +44,7 @@ dev = [
   "pytest-asyncio",
   "starlette",
   "httpx",
+  "pytest-cov"
 ]
 experimental = [
   "pydantic",
