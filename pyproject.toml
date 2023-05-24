@@ -49,7 +49,8 @@ dev = [
   "pytest-asyncio",
   "starlette",
   "httpx",
-  "pytest-cov"
+  "pytest-cov",
+  "git-changelog"
 ]
 experimental = [
   "pydantic",

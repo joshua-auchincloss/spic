@@ -1,9 +1,5 @@
 from dataclasses import dataclass
-from typing import Annotated
-
 from beartype import beartype
-from serde import serde
-
 from src.spic.app import Spic
 from src.spic.params import Header, Query
 from src.spic.routing import Router
@@ -57,14 +53,14 @@ def arg_bool(boolv_q: Query[bool]):
 @slip.get("/args-headers")
 def arg_str(query: Test):
     assert query.arg_bool is True
-    assert query.arg_float == 3.4
+    assert query.arg_float == float(3.4)
     assert query.arg_str == "sre"
-    assert query.arg_int == 4
+    assert query.arg_int == int(4)
     return "200"
 
 
 @slip.get("/arg-str")
-def arg_str(s: Query.type(str)):
+def arg_str_2(s: Query.type(str)):
     s: list[str]
     return {"param": s}
 
@@ -73,7 +69,7 @@ rtr2 = Router(prefix="/prefix")
 
 
 @rtr2.get("health")
-def health():
+def health_2():
     return "ok"
 
 
@@ -86,7 +82,7 @@ def test_mtd():
 
 
 @drain.get("/")
-def test_mtd(qu: Qu):
+def test_mtd_2(_: Qu):
     return ""
 
 

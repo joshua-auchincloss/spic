@@ -82,7 +82,10 @@ class Response:
             if isinstance(self.content, str):
                 self.content = cast(str, self.content).encode()
             elif isinstance(self.content, (int, float)):
-                self.content = f"{self.content:.0f}"
+                fmt = "{:}"
+                if isinstance(self.content, int):
+                    fmt = "{:.0f}"
+                self.content = fmt.format(self.content).encode()
 
         return {
             "type": "http.response.body",

@@ -6,13 +6,14 @@ from hypercorn.typing import HTTPScope, Scope
 from rich.console import Console
 
 from .__about__ import __version__
-from .defaults import DefaultConsole
+from .defaults import DEFAULT_LOG_LEVEL, DefaultConsole
 from .emit import _emit
 from .enums import LogLevel
 from .exceptions import HTTPError, JSONError, SerializableValidationErrors, send_error
 from .func_handler import ManyValidationErrors
 from .middleware import Middleware
 from .openapi import OAPI_VERSION, OpenAPISchema, get_schema_from_route
+from .openapi.models import ExternalDocumentation, Info, Server
 from .request import Request
 from .routing import Router
 from .types import P
@@ -29,6 +30,9 @@ class Spic:
     middlewares: list[Middleware] = []
     log_level: LogLevel
     type_validation: bool
+    servers: list[Server]
+    tags: list[dict]
+    external_docs: ExternalDocumentation
 
     def __init__(
         self,
@@ -36,10 +40,13 @@ class Spic:
         console: Console = None,
         prefix: str = None,
         version: str = None,
-        log_level: LogLevel = LogLevel.follow,
+        log_level: LogLevel = None,
         type_validation: bool = None,
+        servers: list[Server] = None,
+        tags: list[dict] = None,
+        external_docs: ExternalDocumentation = None,
     ):
-        self.log_level = log_level
+        self.log_level = when_none(log_level, DEFAULT_LOG_LEVEL)
         if console is None:
             console = DefaultConsole
         self.console = console
@@ -52,6 +59,9 @@ class Spic:
             log_level=self.log_level,
         )
         self.type_validation = when_none(type_validation, True)
+        self.servers = when_none(servers, [])
+        self.tags = when_none(tags, [])
+        self.external_docs = external_docs
 
     async def __call__(self, scope: Scope, receive, send):
         if scope["type"] != "http":
@@ -63,31 +73,25 @@ class Spic:
         route = self.router.hashed.get(path)
         if route is None:
             __err__ = f"no path matching {path} with the attempted method ({mtd})"
-            await send_error(
+            await self.send_error(
                 send,
                 HTTPError(status_code=HTTPStatus.NOT_FOUND, message=__err__),
-                l_level=self.log_level,
-                trace=self.console,
             )
             return
 
         elif mtd not in route.methods:
             __err__ = f"invalid method ({mtd}) for path: {path}"
-            await send_error(
+            await self.send_error(
                 send,
                 HTTPError(status_code=HTTPStatus.METHOD_NOT_ALLOWED, message=__err__),
-                l_level=self.log_level,
-                trace=self.console,
             )
             return
         handler = route.func.get(mtd)
         if handler is None or not callable(handler):
             __err__ = "internal server error"
-            await send_error(
+            await self.send_error(
                 send,
                 HTTPError(status_code=HTTPStatus.INTERNAL_SERVER_ERROR, message=__err__),
-                l_level=self.log_level,
-                trace=self.console,
             )
             return
         _ = await receive()
@@ -139,12 +143,16 @@ class Spic:
             l_level=self.log_level,
         )
 
-    async def match_paths(self, path):
-        pass
-
     @property
     def base_schema(self):
-        return {"openapi": OAPI_VERSION, "info": {"title": self.title, "version": self.version}, "paths": {}}
+        return {
+            "openapi": OAPI_VERSION,
+            "info": Info(title=self.title, version=self.version),
+            "paths": {},
+            "tags": self.tags,
+            "servers": self.servers,
+            "external_docs": self.external_docs,
+        }
 
     def finalize_schema(self):
         schema = self.schema

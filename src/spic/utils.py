@@ -6,11 +6,7 @@ from rich.console import Console
 from serde import serde
 
 from .enums import LogLevel
-from .types import LA, Hdr, Lazy, P
-
-# from logging import getLogger, INFO, ERROR, CRITICAL, DEBUG
-
-# logger = getLogger(__name__)
+from .types import LA, Lazy, P
 
 T = TypeVar("T")
 
@@ -40,10 +36,6 @@ def run(func: Lazy) -> LA:
     return inner
 
 
-def merged_mapping(hdr1: Hdr, hdr2: Hdr):
-    return {**when_none(hdr2, {}), **when_none(hdr1, {})}
-
-
 def schema(cls=None, *args: P.args, **kwargs: P.kwargs):
     def inner(adaptor):
         return serde(*args, **kwargs)(dataclass(adaptor))
@@ -63,6 +55,3 @@ def schema(cls=None, *args: P.args, **kwargs: P.kwargs):
 def log_level(console: Console, l_level: LogLevel, gt: LogLevel, *args: P.args, **kwargs: P.kwargs):
     if l_level.value >= gt.value and console is not None:
         console.log(*args, **kwargs)
-    # level = LEVEL_TO[l_level]
-    # if level:
-    #     logger.log(level, *args, **kwargs)

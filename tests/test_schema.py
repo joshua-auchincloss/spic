@@ -12,5 +12,5 @@ def schema_client():
     return BaseTests(slip)
 
 
-# def test_schema_ok(schema_client: BaseTests):
-#     schema_client.basic_get_test("/schema")
+def test_schema_ok(schema_client: BaseTests):
+    schema_client.basic_get_test("/schema")
