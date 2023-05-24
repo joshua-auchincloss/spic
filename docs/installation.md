@@ -1,6 +1,9 @@
 # User Guide
+
 ## Installation
-`pip install slip[core]`
+
+`pip install spic[core]`
 
 ### With `msgpack` serialization
-`pip install slip[msgpack]`
+
+`pip install spic[msgpack]`

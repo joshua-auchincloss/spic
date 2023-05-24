@@ -17,7 +17,6 @@ class Test:
     arg_bool: Header[bool]
 
 
-
 # @serde
 @dataclass
 class Qu:
@@ -40,16 +39,20 @@ slip = Spic(title="test")
 
 rtr = Router()
 
+
 @rtr.get("health")
 def health():
     return "ok"
 
+
 slip.include_router(rtr)
+
 
 @slip.get("/arg-q-bool")
 def arg_bool(boolv_q: Query[bool]):
     assert isinstance(boolv_q, bool)
     return boolv_q
+
 
 @slip.get("/args-headers")
 def arg_str(query: Test):
@@ -59,10 +62,12 @@ def arg_str(query: Test):
     assert query.arg_int == 4
     return "200"
 
+
 @slip.get("/arg-str")
 def arg_str(s: Query.type(str)):
     s: list[str]
-    return {"param":s}
+    return {"param": s}
+
 
 rtr2 = Router(prefix="/prefix")
 
@@ -71,12 +76,13 @@ rtr2 = Router(prefix="/prefix")
 def health():
     return "ok"
 
+
 drain = Router("/test")
 
 
 @slip.get("/health")
 def test_mtd():
-    return {"status":"healthy"}
+    return {"status": "healthy"}
 
 
 @drain.get("/")
@@ -92,5 +98,3 @@ def test_mtd_2(model: Qu):
 
 slip.include_router(drain)
 slip.collapse()
-
-

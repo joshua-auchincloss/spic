@@ -2,7 +2,7 @@ cov:
 		source ./env/bin/activate && \
 		./scripts/test.sh && \
 		./scripts/cov.sh
-lint: 
+lint:
 		black ./src && black ./tests \
 		&& ruff check ./src
 test-env:

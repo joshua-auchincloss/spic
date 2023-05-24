@@ -97,7 +97,7 @@ def query_extractor(request: Request, key: str):
 
 
 @extractor
-def request_extractor(_: Request, __: str=None):
+def request_extractor(_: Request, __: str = None):
     pass  # never called
 
 

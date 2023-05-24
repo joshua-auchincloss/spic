@@ -25,7 +25,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "srsly", 
+  "srsly",
   "uvicorn",
   "rich",
   "hypercorn",
@@ -54,9 +54,9 @@ msgpack = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/unknown/spic#readme"
-Issues = "https://github.com/unknown/spic/issues"
-Source = "https://github.com/unknown/spic"
+Documentation = "https://github.com/joshua-auchincloss/spic#readme"
+Issues = "https://github.com/joshua-auchincloss/spic/issues"
+Source = "https://github.com/joshua-auchincloss/spic"
 
 [tool.hatch.version]
 path = "src/spic/__about__.py"
@@ -145,11 +145,11 @@ ignore = [
   # Allow boolean positional values in function calls, like `dict.get(... True)`
   "FBT003",
   # Ignore complexity
-  "C901", 
+  "C901",
   "A003",
-  "PLR0911", 
-  "PLR0912", 
-  "PLR0913", 
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
   "PLR0915",
   "FBT002",
   "FBT001",
@@ -175,8 +175,8 @@ omit = [
 ]
 
 [tool.coverage.paths]
-spic = ["src/spic", 
-        "*/src/spic", 
+spic = ["src/spic",
+        "*/src/spic",
         "src.spic",
         "spic"
         ]

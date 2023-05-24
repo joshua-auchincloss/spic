@@ -3,4 +3,4 @@ authors = ["joshua-auchincloss"]
 language = "en"
 multilingual = false
 src = "docs"
-title = "slip-api"
+title = "spic-api"

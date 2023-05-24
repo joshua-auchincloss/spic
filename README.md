@@ -1,13 +1,14 @@
-# `slip`
+# `spic`
 
 [![PyPI - Version](https://img.shields.io/pypi/v/spic.svg)](https://pypi.org/project/spic)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/spic.svg)](https://pypi.org/project/spic)
 [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
-[![Code Coverage](https://img.shields.io/codecov/c/github/joshua-auchincloss/slip?style=flat-square)](https://github.com/joshua-auchincloss/spic)
+[![Code Coverage](https://img.shields.io/codecov/c/github/joshua-auchincloss/spic?style=flat-square)](https://github.com/joshua-auchincloss/spic)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/charliermarsh/ruff)
 
 ---
-# `slip`
 
+# `spic`
 
 **Table of Contents**
 
@@ -25,10 +26,9 @@
 - [Rationale](#rationale)
 - [License](#license)
 
-
 ## Intro
 
-`slip` is an ASGI based api router with minimal dependencies and strong typing.
+`spic` is an ASGI based api router with minimal dependencies and strong typing.
 
 ## Rationale
 
@@ -42,7 +42,7 @@
 ```py
 # ./main.py
 
-from slip.app import Slip
+from spic.app import Slip
 
 app = Slip(title="my-api", version="0.1")
 
@@ -60,7 +60,7 @@ app.collapse() # collapse routes
 ```py
 # ./main.py
 
-from slip.params import Header, Query
+from spic.params import Header, Query
 
 ...
 
@@ -80,7 +80,7 @@ app.collapse()
 ```py
 # ./main.py
 from dataclasses import dataclass
-from slip.params import Header, Query
+from spic.params import Header, Query
 
 ...
 
@@ -114,7 +114,7 @@ class QueryArgs:
 # OR
 
 # ./models.py
-from slip.utils import schema
+from spic.utils import schema
 
 @schema
 class QueryArgs:
@@ -175,4 +175,4 @@ pip install spic[core]
 
 ## License
 
-`slip` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`spic` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

@@ -1,8 +1,8 @@
 # Introduction
 
-## `slip`
+## `spic`
 
-`slip` is an ASGI based api router with minimal dependencies and strong typing.
+`spic` is an ASGI based api router with minimal dependencies and strong typing.
 
 ## features
 
@@ -11,7 +11,7 @@
 ```py
 # ./main.py
 
-from slip.app import Slip
+from spic.app import Slip
 
 app = Slip(title="my-api", version="0.1")
 
@@ -29,7 +29,7 @@ app.collapse() # collapse routes
 ```py
 # ./main.py
 
-from slip.params import Header, Query
+from spic.params import Header, Query
 
 ...
 
@@ -49,7 +49,7 @@ app.collapse()
 ```py
 # ./main.py
 from dataclasses import dataclass
-from slip.params import Header, Query
+from spic.params import Header, Query
 
 ...
 
@@ -83,7 +83,7 @@ class QueryArgs:
 # OR
 
 # ./models.py
-from slip.utils import schema
+from spic.utils import schema
 
 @schema
 class QueryArgs:
