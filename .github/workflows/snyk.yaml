@@ -16,6 +16,8 @@ on:
     #        *  * * * *
     - cron: '0 0 * * 6' # saturday @ midnight
 jobs:
+  permissions:
+    security-events: write
   security:
     runs-on: ubuntu-latest
     steps:
