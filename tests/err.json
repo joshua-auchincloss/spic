@@ -1,0 +1,22 @@
+{
+  "errors": [
+    {
+      "key": "arg2",
+      "expected": "string",
+      "given": "None",
+      "sources": ["query"]
+    },
+    {
+      "key": "arg3",
+      "expected": "number",
+      "given": "None",
+      "sources": ["query"]
+    },
+    {
+      "key": "header_str",
+      "expected": "string",
+      "given": "None",
+      "sources": ["header"]
+    }
+  ]
+}
