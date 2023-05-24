@@ -1,6 +1,6 @@
 from collections.abc import Iterable, Mapping
 from dataclasses import is_dataclass
-from typing import Any, Callable
+from typing import Callable
 from typing import Mapping as TMapping
 
 from serde import is_serializable
