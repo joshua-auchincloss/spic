@@ -45,3 +45,15 @@ def get_args(tp: Type[Any]) -> Tuple[Any, ...]:
         return tp.__args__ + tp.__metadata__
     # the fallback is needed for the same reasons as `get_origin` (see above)
     return _get_args(tp) or getattr(tp, "__args__", ()) or _generic_get_args(tp)
+
+
+class DependencyError(Exception):
+    def __init__(self, pkg: str):
+        self.pkg = pkg
+
+
+def create_raises_dep_error(pkg: str):
+    def handle(*_, **__):
+        raise DependencyError(pkg)
+
+    return handle

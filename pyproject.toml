@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "spic"
 dynamic = ["version"]
-description = ''
+description = "a little opinionated framework for creating spic & span apis"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
@@ -14,13 +14,22 @@ authors = [
   { name = "joshua-auchincloss", email = "joshua.auchincloss@proton.me" },
 ]
 classifiers = [
+  "Typing :: Typed",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development",
   "Development Status :: 4 - Beta",
+  "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "License :: OSI Approved :: MIT License",
 ]
 dependencies = [
   "srsly",
@@ -28,12 +37,10 @@ dependencies = [
   "rich",
   "hypercorn",
   "beartype",
+  "pyserde[json]",
 ]
 
 [project.optional-dependencies]
-core = [
-  "pyserde[json]",
-]
 dev = [
   "coverage",
   "black",
@@ -50,6 +57,10 @@ experimental = [
 msgpack = [
   "msgpack",
   "pyserde[msgpack]"
+]
+grpc-compat = [
+  "protobuf",
+  "grpcio"
 ]
 
 [project.urls]

@@ -1,0 +1,9 @@
+version: v1
+managed: 
+  enabled: true
+
+plugins: 
+  - plugin: buf.build/protocolbuffers/python
+    out: ./protos/gen
+  - plugin: buf.build/protocolbuffers/pyi
+    out: ./protos/gen

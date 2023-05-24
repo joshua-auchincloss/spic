@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class RegisteredContent(Enum):
@@ -11,3 +11,8 @@ class LogLevel(Enum):
     headless = 0
     follow = 1
     trace = 99
+
+
+class FormatMessageOps(Enum):
+    to_dict = auto()
+    to_json = auto()
