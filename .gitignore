@@ -1,6 +1,5 @@
 book
 __pycache__
-.coverage
 .vscode
 .pytest_cache
 env
