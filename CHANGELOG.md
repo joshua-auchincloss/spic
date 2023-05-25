@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.1.0](https://github.com/joshua-auchincloss/spic/releases/tag/v0.1.0) - 2023-05-25
 
-## [0.1.0](https://github.com/joshua-auchincloss/spic/releases/tag/v0.0.60.1.0) - 2023-05-24
+<small>[Compare with v0.0.6](https://github.com/joshua-auchincloss/spic/compare/v0.0.6...v0.1.0)</small>
+
+## [v0.0.6](https://github.com/joshua-auchincloss/spic/releases/tag/v0.0.6) - 2023-05-24
 
 <small>[Compare with first commit](https://github.com/joshua-auchincloss/spic/compare/469946b0473f1a587dc87cd288eb4f604bb4a538...v0.0.6)</small>
 
@@ -28,3 +31,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - fix: add .coverage ([8f4232a](https://github.com/joshua-auchincloss/spic/commit/8f4232ae3ba0e22557a49e7d1ca5d40f85165fb5) by benefactarch).
 - fix: coverage actions ([4442cf2](https://github.com/joshua-auchincloss/spic/commit/4442cf24f9a44a85494e205676df036cbc4148bc) by benefactarch).
 - fix: ruff actions ([d2b0049](https://github.com/joshua-auchincloss/spic/commit/d2b004973ab8cdac6617fbae6f06fba472ddf79a) by benefactarch).
+
