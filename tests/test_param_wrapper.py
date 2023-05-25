@@ -1,7 +1,5 @@
 from argparse import Namespace
 
-from starlette.requests import Request
-
 from src.spic.params import extractor
 
 BTS_BASE = [1, 2, 3]

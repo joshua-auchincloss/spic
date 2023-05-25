@@ -8,7 +8,18 @@ from src.spic.exceptions import HTTPError
 P = ParamSpec("P")
 
 
+async def send(*_, **__):
+    pass
+
+
+receive = send
+
+
 class BaseTests(TestClient):
+    async def wait_startup(self) -> None:
+        message = await self.send({"type": "lifespan.startup"})
+        assert message["type"] == ("lifespan.startup.complete",)
+
     @staticmethod
     def asserting(response: Response, status: int = 200):
         assert response.status_code == status

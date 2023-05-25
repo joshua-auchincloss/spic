@@ -33,10 +33,9 @@ classifiers = [
 ]
 dependencies = [
   "srsly",
-  "uvicorn",
   "rich",
-  "hypercorn",
   "beartype",
+  "hypercorn",
   "pyserde[json]",
 ]
 
@@ -57,7 +56,6 @@ experimental = [
 ]
 msgpack = [
   "msgpack",
-  "pyserde[msgpack]"
 ]
 grpc-compat = [
   "protobuf",
@@ -199,3 +197,6 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

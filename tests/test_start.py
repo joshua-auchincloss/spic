@@ -10,8 +10,6 @@ def mtd():
     return "healthy"
 
 
-slip.collapse()
-
 client = TestClient(slip)
 
 

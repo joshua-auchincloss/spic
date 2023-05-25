@@ -6,13 +6,12 @@ from hypercorn.typing import ASGIReceiveCallable, ASGISendCallable, Scope
 from .inspect import inspect_function
 from .request import Request
 
+SyncSpawn = Callable[[], Awaitable[None]]
+CallSoon = SyncSpawn
+Intra = tuple[Scope, ASGIReceiveCallable, ASGISendCallable, SyncSpawn, CallSoon]
 IntraMiddleware = Callable[[Scope, ASGIReceiveCallable, ASGISendCallable], Awaitable[None]]
 Next = Callable[[Request], Any]
 RequestMiddleware = Callable[[Request, Next], Awaitable[None]]
-
-
-async def sample_request_middleware(request: Request, nxt: Next):
-    return await nxt(request)
 
 
 @dataclass

@@ -4,13 +4,14 @@ from .methods import raises_no_implmt
 from .protos.gen.hello_pb2 import Hey
 
 MSG = Hey(hi="string")
-EXPECT = '{\n  "hi": "string"\n}'
+EXPECT = '{"hi":"string"}'
+EXPECT_DICT = {"hi": "string"}
 EXPECT_LI = '[{"hi":"string"}]'
 
 
 def test_grpc_conversion():
     json = _grpc_conversion(MSG)
-    assert json == EXPECT
+    assert json == EXPECT_DICT
 
 
 def test_grpc_response():

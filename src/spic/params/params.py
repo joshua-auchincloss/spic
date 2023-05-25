@@ -1,17 +1,8 @@
-from enum import Enum
 from typing import Annotated, Any, Callable
 
+from ..enums import ParamTypes
 from ..request import Request
 from ..utils import T
-
-
-class ParamTypes(Enum):
-    Header = "header"
-    Cookie = "cookie"
-    Body = "body"
-    Query = "query"
-    Request = "request"
-
 
 TypeExtractor = Callable[[Any], T]
 RequestExtractor = Callable[[Request, str, TypeExtractor], T]

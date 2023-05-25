@@ -28,7 +28,7 @@ class DCNestTest:
 # no serde
 @dataclass
 class InvalidT:
-    field: str = ""
+    field: str
 
 
 class BMTest(BaseModel):

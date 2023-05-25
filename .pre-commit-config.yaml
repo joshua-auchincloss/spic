@@ -22,7 +22,8 @@ repos:
   rev: 'v0.0.269'
   hooks:
     - id: ruff
-      args: [./src]
+      args:
+        - src
 - repo: https://github.com/compilerla/conventional-pre-commit
   rev: 'v2.2.0'
   hooks:

@@ -1,11 +1,14 @@
+from argparse import Namespace
 from dataclasses import dataclass, field
+from glob import glob
+from mimetypes import guess_type
 from typing import Any, Callable, Mapping, Set
 
 from beartype import beartype
 from rich.console import Console
 
 from .defaults import DefaultConsole
-from .encoders import json
+from .encoders import content_encoding, json, text
 from .enums import LogLevel
 from .func_handler import wrap_endpoint_handler
 from .inspect import Preamble, get_path_param_names, inspect_dataclass, inspect_function
@@ -54,6 +57,8 @@ class Router:
 
     hashed: Mapping[str, Route] = {}
 
+    mounted_files = {}
+
     def __init__(self, prefix: str = None, log_level: LogLevel = None, console: Console = None):
         self._routes = []
         self.prefix = when_none(prefix, "/")
@@ -70,6 +75,7 @@ class Router:
     # def build_middleware_chain(self):
     #     for n, mw in enumerate(self.middlewares):
     #         if not mw.inst_of_intra:
+
     @property
     def validation(self):
         return self.type_validation
@@ -141,7 +147,9 @@ class Router:
         for svc in svc_routes:
             self.hashed[svc.path] = svc
 
-    def _decorate(self, path: str, method: str, model: Any = None, include_in_schema: bool = True):
+    def _decorate(
+        self, path: str, method: str, model: Any = None, include_in_schema: bool = True, content_encoder=json
+    ):
         if model:
             inspect_dataclass(model)
 
@@ -151,6 +159,7 @@ class Router:
                     path=path,
                     method=method,
                     func=func,
+                    content_encoder=content_encoder,
                     kwargs={
                         "include_in_schema": include_in_schema,
                     },
@@ -183,3 +192,20 @@ class Router:
 
     def custom(self, path: str, method: str, *args: P.args, **kwargs: P.kwargs) -> Decorator:
         return self._decorate(*args, path=path, method=method, **kwargs)
+
+    def static_dir(self, path: str, base_dir: str, *args: P.args, **kwargs: P.kwargs) -> Decorator:
+        globp = glob(f"{base_dir}/**.*")
+        self.console.log(globp)
+        for globbed in globp:
+            self.static(*args, path=path + globbed.replace(base_dir, ""), file=globbed, **kwargs)
+
+    def static(self, path: str, file: str, *args: P.args, **kwargs: P.kwargs) -> Decorator:
+        with open(file, "r+b") as f:
+            ct = f.read()
+        guess, _ = guess_type(file)
+        custom = content_encoding(Namespace(value=guess) if guess else text)(lambda caller: caller)
+
+        def handler():
+            return ct
+
+        return self._decorate(*args, path=path, method="GET", content_encoder=custom, **kwargs)(handler)

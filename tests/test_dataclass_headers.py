@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 
 import pytest
-from starlette.testclient import TestClient
 
 from src.spic.app import Spic
 from src.spic.params import Header
+
+from .methods import BaseTests, receive, send
 
 
 @dataclass
@@ -16,7 +17,7 @@ class Test:
 
 
 @pytest.fixture
-def client():
+async def client():
     slip = Spic(title="test")
 
     @slip.get("args-headers")
@@ -27,9 +28,8 @@ def client():
         assert query.arg_int == 4
         return "200"
 
-    slip.collapse()
-
-    client = TestClient(slip)
+    await slip({"type": "lifespan"}, receive, send)
+    client = BaseTests(slip)
     return client
 
 

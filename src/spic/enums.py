@@ -1,10 +1,19 @@
 from enum import Enum, auto
 
 
+class ParamTypes(Enum):
+    Header = "header"
+    Cookie = "cookie"
+    Body = "body"
+    Query = "query"
+    Request = "request"
+
+
 class RegisteredContent(Enum):
     TEXT = "text/plain; charset=UTF-8"
     JSON = "application/json"
     MSGPACK = "application/x-msgpack"
+    YAML = "application/yaml"
 
 
 class LogLevel(Enum):

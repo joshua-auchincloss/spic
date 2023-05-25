@@ -1,6 +1,10 @@
 from dataclasses import dataclass
+
 from beartype import beartype
+
 from src.spic.app import Spic
+from src.spic.enums import LogLevel
+from src.spic.openapi.models import Server, ServerVariable
 from src.spic.params import Header, Query
 from src.spic.routing import Router
 
@@ -11,6 +15,11 @@ class Test:
     arg_int: Header[int]
     arg_float: Header[float]
     arg_bool: Header[bool]
+
+
+@dataclass
+class InvalidT:
+    field: str
 
 
 # @serde
@@ -30,7 +39,16 @@ class Qu:
         }
 
 
-slip = Spic(title="test")
+slip = Spic(
+    title="test",
+    # log_level=LogLevel.trace,
+    servers=[
+        Server(url="/", description="main server", variables={"var1": ServerVariable(default="abc", enum=LogLevel)})
+    ],
+)
+
+slip.router.static("/static", "./COVERAGE.md")
+slip.router.static_dir("/static2", "./tests")
 
 
 rtr = Router()
@@ -42,20 +60,26 @@ def health():
 
 
 slip.include_router(rtr)
+TE = InvalidT(field="field")
 
 
 @slip.get("/arg-q-bool")
 def arg_bool(boolv_q: Query[bool]):
-    assert isinstance(boolv_q, bool)
+    assert isinstance(boolv_q, bool)  # noqa: S101
     return boolv_q
+
+
+@slip.get("/invalid")
+def invalid():
+    return TE
 
 
 @slip.get("/args-headers")
 def arg_str(query: Test):
-    assert query.arg_bool is True
-    assert query.arg_float == float(3.4)
-    assert query.arg_str == "sre"
-    assert query.arg_int == int(4)
+    assert query.arg_bool is True  # noqa: S101
+    assert query.arg_float == float(3.4)  # noqa: S101
+    assert query.arg_str == "sre"  # noqa: S101
+    assert query.arg_int == int(4)  # noqa: S101
     return "200"
 
 
@@ -88,9 +112,9 @@ def test_mtd_2(_: Qu):
 
 @drain.get("/args:arg1:arg2:arg3", model=Qu)
 @beartype
-def test_mtd_2(model: Qu):
+def test_mtd_3(model: Qu):
     return model
 
 
 slip.include_router(drain)
-slip.collapse()
+# slip.collapse()

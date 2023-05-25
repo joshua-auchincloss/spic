@@ -12,15 +12,15 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x0bhello.proto\x12\x04test\"\x15\n\x03Hey\x12\x0e\n\x02hi\x18\x01 \x01(\tR\x02hiBF\n\x08\x63om.testB\nHelloProtoP\x01\xa2\x02\x03TXX\xaa\x02\x04Test\xca\x02\x04Test\xe2\x02\x10Test\\GPBMetadata\xea\x02\x04Testb\x06proto3'
+    b'\n\x0bhello.proto\x12\x04test\"\x15\n\x03Hey\x12\x0e\n\x02hi\x18\x01 \x01(\tR\x02hiBF\n\x08\x63om.testB\nHelloProtoP\x01\xa2\x02\x03TXX\xaa\x02\x04Test\xca\x02\x04Test\xe2\x02\x10Test\\GPBMetadata\xea\x02\x04Testb\x06proto3'  # noqa: E501
 )
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'hello_pb2', _globals)
-if _descriptor._USE_C_DESCRIPTORS == False:
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "hello_pb2", _globals)
+if _descriptor._USE_C_DESCRIPTORS is False:
     DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = b'\n\010com.testB\nHelloProtoP\001\242\002\003TXX\252\002\004Test\312\002\004Test\342\002\020Test\\GPBMetadata\352\002\004Test'
-    _globals['_HEY']._serialized_start = 21
-    _globals['_HEY']._serialized_end = 42
+    DESCRIPTOR._serialized_options = b"\n\010com.testB\nHelloProtoP\001\242\002\003TXX\252\002\004Test\312\002\004Test\342\002\020Test\\GPBMetadata\352\002\004Test"  # noqa: E501
+    _globals["_HEY"]._serialized_start = 21
+    _globals["_HEY"]._serialized_end = 42
 # @@protoc_insertion_point(module_scope)

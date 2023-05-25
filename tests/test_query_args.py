@@ -3,11 +3,11 @@ import pytest
 from src.spic.app import Spic
 from src.spic.params import Query
 
-from .methods import BaseTests
+from .methods import BaseTests, receive, send
 
 
 @pytest.fixture
-def q_client():
+async def q_client():
     slip = Spic(title="test")
 
     @slip.get("arg-q-str")
@@ -34,9 +34,10 @@ def q_client():
         assert isinstance(flt_q, float)
         return flt_q
 
-    slip.collapse()
+    await slip({"type": "lifespan"}, receive, send)
+    client = BaseTests(slip)
 
-    return BaseTests(slip)
+    return client
 
 
 def test_query_str(q_client):

@@ -2,9 +2,7 @@ from dataclasses import Field as _Field
 from dataclasses import dataclass, fields, is_dataclass
 from inspect import get_annotations
 from re import findall
-from typing import Annotated, Set
-
-from beartype.vale import Is
+from typing import Set
 
 from .types import C
 
@@ -37,7 +35,7 @@ class Field:
 @dataclass
 class Class:
     meta: Meta
-    obj: Annotated[object, Is[lambda obj: is_dataclass(obj)]]
+    obj: list[_Field]
 
 
 @dataclass

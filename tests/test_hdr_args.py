@@ -3,11 +3,11 @@ import pytest
 from src.spic.app import Spic
 from src.spic.params import Header
 
-from .methods import BaseTests
+from .methods import BaseTests, receive, send
 
 
 @pytest.fixture
-def hdr_client():
+async def hdr_client():
     app = Spic(title="test")
 
     @app.get("arg-hdr-str")
@@ -35,9 +35,9 @@ def hdr_client():
         assert isinstance(flt, float)
         return flt
 
-    app.collapse()
-
+    await app({"type": "lifespan"}, receive, send)
     client = BaseTests(app)
+
     return client
 
 

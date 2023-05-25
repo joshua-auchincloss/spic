@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional, TypeVar
 
 from rich.console import Console
-from serde import serde
+from serde import field, serde
 
 from .enums import LogLevel
 from .types import LA, Lazy, P
@@ -45,6 +45,14 @@ def schema(cls=None, *args: P.args, **kwargs: P.kwargs):
     return inner(cls)
 
 
+def is_none(value):
+    return (value is None) | (value == [])
+
+
+def skip_empty(*args: P.args, **kwargs: P.kwargs):
+    return field(*args, **kwargs, skip_if=is_none)
+
+
 # LEVEL_TO = {
 #     LogLevel.trace:   DEBUG,
 #     LogLevel.follow:   INFO,
@@ -52,6 +60,6 @@ def schema(cls=None, *args: P.args, **kwargs: P.kwargs):
 # }
 
 
-def log_level(console: Console, l_level: LogLevel, gt: LogLevel, *args: P.args, **kwargs: P.kwargs):
-    if l_level.value >= gt.value and console is not None:
+def log_level(console: Console, l_level: LogLevel, gte: LogLevel, *args: P.args, **kwargs: P.kwargs):
+    if l_level.value >= gte.value and console is not None:
         console.log(*args, **kwargs)
